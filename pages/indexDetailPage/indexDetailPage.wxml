@@ -1,0 +1,12 @@
+<!--pages/indexDetailPage/indexDetailPage.wxml-->
+<import src="../wxParse/wxParse.wxml"/>
+
+<view class='all_container'>
+  <text class='title'>{{title}}</text>
+
+  <view class='container'>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+</view>
+
+

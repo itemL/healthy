@@ -1,0 +1,8 @@
+
+<template name="showType_2">
+  <view class='warn_showType_2'>
+      <image src='/images/loading@2x.gif' class='loading_view'>
+      </image>
+      <text class='loading_text'>正在加载</text> 
+  </view>
+</template>

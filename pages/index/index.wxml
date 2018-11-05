@@ -1,0 +1,120 @@
+<!--index.wxml-->
+<import src="../../common/warn/warn.wxml" />
+
+<view class='main_container'>
+  <template is="showType_{{showtype}}" wx:if="{{showtype != 1}}" />
+
+  <view class="container" scroll-y="false" hidden='{{showtype != 1}}'>
+    <view class='navBar' wx:if="{{healthyList1.length > 0 && healthyList2.length > 0}}">
+      <view class='navTextAndLineView' catchtap='clickItemChangesBtn' data-channel='{{categoryName1}}'>
+        <text class="navText {{index == 0 ? 'textselected' : ''}}">{{categoryName2}}</text>
+        <view class='yellowLine' wx:if="{{index==0}}"></view>
+      </view>
+
+      <view class='navTextAndLineView' catchtap='clickItemChangesBtn' data-channel='{{categoryName2}}'>
+        <text class="navText {{index == 1 ? 'textselected' : ''}}">{{categoryName1}}</text>
+        <view class='yellowLine' wx:if="{{index==1}}"></view>
+      </view>
+  </view>
+
+  <swiper class='swiper_container' scroll-y="true" current='{{index}}' bindchange='swiperchange' data-channel='{{index==0 ? categoryName1 : categoryName2 }}'>
+    <swiper-item class='swiper_container'>
+      <scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="onReachSwiperBottom" bindscrolltoupper="onReachSwiperTop" scroll-top="{{scrollTop2}}" scroll-y="true" class='scroll-view-swiper'>
+      <view class='pullLoading' wx:if="{{isPullLoading}}">
+        <image src='/images/loading@2x.gif' class='loading_view'></image>
+      </view>
+
+      <block wx:for="{{REVERSE.firstFun(healthyPullList2)}}" wx:key="id" wx:if="{{healthyPullList2 && healthyPullList2.length > 0}}">
+        <template is="healthyTemplate" data="{{...item}}" />
+      </block>
+
+      <view class='pullLoading' wx:if="{{isPullLoading}}" wx:if="{{healthyPullList2 && healthyPullList2.length > 0}}" catchtap='clickRefreshPullData'>
+        <view class='refreshView'>
+          <text>上次看到这里,点击刷新</text>
+        </view>
+      </view>
+      
+      <block wx:for="{{REVERSE.reverseFun(healthyPullList2)}}">
+        <block wx:for="{{item}}">
+          <template is="healthyTemplate" data="{{...item}}" />
+          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
+        </block>
+      </block>
+
+      <block wx:for="{{healthyList2}}">
+        <block wx:for="{{item}}">
+          <template is="healthyTemplate" data="{{...item}}" />
+          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
+        </block>
+      </block>
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="onReachSwiperBottom" bindscrolltoupper="onReachSwiperTop" scroll-top="{{scrollTop1}}" scroll-y="true" class='scroll-view-swiper'>
+
+      <view class='pullLoading' wx:if="{{isPullLoading}}">
+        <image src='/images/loading@2x.gif' class='loading_view'></image>
+      </view>
+
+      <block wx:for="{{REVERSE.firstFun(healthyPullList1)}}" wx:key="id" wx:if="{{healthyPullList1 && healthyPullList1.length > 0}}">
+        <template is="healthyTemplate" data="{{...item}}" />
+      </block>
+
+      <view class='pullLoading' wx:if="{{isPullLoading}}" wx:if="{{healthyPullList1 && healthyPullList1.length > 0}}" catchtap='clickRefreshPullData'>
+        <view class='refreshView'>
+          <text>上次看到这里,点击刷新</text>
+        </view>
+      </view>
+      
+      <block wx:for="{{REVERSE.reverseFun(healthyPullList1)}}">
+        <block wx:for="{{item}}">
+          <template is="healthyTemplate" data="{{...item}}" />
+          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
+        </block>
+      </block>
+
+      <block wx:for="{{healthyList1}}">
+        <block wx:for="{{item}}">
+          <template is="healthyTemplate" data="{{...item}}" />
+          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
+        </block>
+      </block>
+    </scroll-view>
+    </swiper-item>
+
+  </swiper>
+  
+  </view>
+</view>
+
+<template name="healthyTemplate">
+  <navigator class="healthy_container" url='#' bindtap='itemTap' data-text="{{content}}" data-title="{{title}}" wx:if="{{images[0].url}}">
+    <text class='title'>{{title}}</text>
+    <image class='image' src='{{images[0].url}}' wx:if="{{images[0].url}}"></image>
+  </navigator>
+</template> 
+
+<wxs module="REVERSE">
+  var reverseFun = function(array){
+    if(array){
+     var reverseList = [];
+      for(var i = array.length - 2; i >= 0; --i){
+        reverseList[array.length - i] = array[i];
+      }
+      var item = reverseList[reverseList.length - 1];
+      return reverseList;
+    }  
+  }
+
+  var firstFun = function(array){
+    if(array){
+      var firstList = [];
+      firstList = array[array.length - 1];
+      return firstList;
+    }
+  }
+
+module.exports.reverseFun = reverseFun;
+module.exports.firstFun = firstFun;
+</wxs>

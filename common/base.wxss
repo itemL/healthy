@@ -1,0 +1,56 @@
+
+
+page{
+  width: 750rpx;
+  height: 100%;
+}
+
+.main_container{
+  height: 100%;
+  width: 100%;
+}
+
+.warn_showType_2{
+  height: 100%;
+  width: 750rpx;
+
+  position: relative;
+  top: 0rpx;
+  left: 0rpx;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pullLoading{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading_view{
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.loading_text{
+  font-family: PingFangSc-Regular;
+  font-size: 32rpx;
+  color:#222222;
+}
+
+.refreshView{
+  background-color: rgba(65, 130, 173, 0.267);
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 8rpx;
+  padding-bottom: 8rpx;
+}
