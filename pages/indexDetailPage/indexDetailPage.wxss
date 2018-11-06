@@ -27,4 +27,5 @@
 }
 
 .all_container .container{
+  width: 100%;
 }

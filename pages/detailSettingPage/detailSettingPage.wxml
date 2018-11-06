@@ -1,0 +1,60 @@
+ <view class='all_container'>
+ 
+ <scroll-view class='sliderContainer_test_view' style="font-size:{{testSize}}rpx;color:rgba({{red}},{{green}},{{blue}},1);" scroll-y="true">可以在下面的选项里面设置自己喜欢的字体颜色，方便大家阅读与观看。</scroll-view>
+
+  <view style='padding-top:30rpx'>
+  <picker range='{{fontType}}' value='1' range-key='name'><view>选择字体库:{{fontName}}</view></picker>
+  </view>
+
+  <view>
+
+        <view class='sliderContainer' style='padding-top:30rpx;'>
+        <text class='text'>字体大小              </text>
+        <slider class='slider' bindchange='__bindchangeFont' value='{{testSize}}'></slider>
+        <text class='text' wx:if="{{testSize > 0}}">{{testSize}}</text>
+      </view>
+    
+      <view class='sliderContainer'>
+        <text class='text'>字体颜色<text style='color:red;'>(红)</text></text>
+        <slider class='slider' bindchange='__bindchangeRed' selected-color='red' value="{{COLOR.getColorperent(red * 100 / 255.0)}}"></slider>
+        <text class='text' wx:if="{{red > 0}}">{{red}}</text>
+      </view>
+
+      <view class='sliderContainer'>
+        <text class='text'>字体颜色<text style='color:green;'>(绿)</text></text>
+        <slider class='slider' bindchange='__bindchangeGreen' selected-color='green' value='{{COLOR.getColorperent(green * 100 / 255.0)}}'></slider>
+        <text class='text' wx:if="{{green > 0}}">{{green}}</text>
+      </view>
+
+      <view class='sliderContainer'>
+        <text class='text'>字体颜色<text style='color:blue;'>(蓝)</text></text>
+        <slider class='slider' bindchange='__bindchangeBlue' selected-color='blue' value='{{COLOR.getColorperent(blue * 100 / 255.0)}}'></slider>
+        <text class='text' wx:if="{{blue > 0}}">{{blue}}</text>
+      </view>
+    </view>
+
+  <view class='bottom_view' style='padding-top:30rpx;'>
+
+    <view class='container' catchtap='__clickResetBtn'>
+      <view class='image iconfont icon-zhongzhi'></view>
+      <view class='endClickBtn'>重置</view>
+    </view>
+
+    <view class='container' catchtap='__clickCancelBtn'>
+      <view class='image iconfont icon-quxiao'></view>
+      <view class='endClickBtn'>取消</view>
+    </view>
+
+    <view class='container' catchtap='__clickSuredBtn'>
+      <view class='image iconfont icon-queren'></view>
+      <view class='endClickBtn'>确认</view>
+    </view>
+  </view>
+ </view>
+
+ <wxs module="COLOR">
+  var getColorperent = function(color){
+    return parseInt(color); 
+  }
+module.exports.getColorperent = getColorperent;
+</wxs>

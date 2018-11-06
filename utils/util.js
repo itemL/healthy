@@ -14,6 +14,18 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function findItemFormListsWithId(lists,id,key){
+  if(lists && id && lists.length > 0){
+    for(var i = 0;i<lists.length; ++i){
+      var item = lists[i];
+      if (item[key] == id){
+        return item;
+      }
+    }
+  }
+  return null;
+}
+
 function fetch(url) {
   return new Promise(function (resolve, reject) {
     wx.request({
@@ -38,6 +50,7 @@ function fetch(url) {
 
 module.exports = {
   formatTime: formatTime,
-  fetch: fetch
+  fetch: fetch,
+  findItemFormListsWithId: findItemFormListsWithId
 }
 

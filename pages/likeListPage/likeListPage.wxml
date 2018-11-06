@@ -1,0 +1,35 @@
+<view class='container'>  
+  <view wx:if="{{likeList.length > 0}}">
+      <block wx:for="{{likeList}}">
+      <template is="healthyTemplate" data="{{...item}}" />
+      </block>
+  </view>
+
+  <view wx:else class='none_container'>
+    <view class='temp_container'>
+      <image src='/images/kongbai.png' class='image'></image>
+      <view class='title'>没有收藏哦</view>
+    </view>
+  </view>
+  
+</view>
+
+<template name="healthyTemplate">
+  <navigator class="healthy_container" url='#' bindtap='itemTap' data-text="{{content}}" data-title="{{title}}">
+    <text class='first_title'>{{title}}</text>
+    <!-- <text class='first_content'>{{content}}</text> -->
+    <image class='image' src='{{images[0].url}}' wx:if="{{images[0].url}}"></image>
+    <view class='bottom_container'>
+      <view class='image_text_container' catchtap='__shoucangDelClick' data-newsId='{{newsId}}'>
+        <view class='iconfont icon-shanchu bottom_image'></view>
+        <text class='bottom_title'>删除</text>
+      </view>
+
+      <view class='image_text_container'>
+        <view class='iconfont icon-share bottom_image'></view>
+        <text class='bottom_title'>分享</text>
+      </view>
+    </view>
+  </navigator>
+  <view class='line_view'></view>
+</template> 

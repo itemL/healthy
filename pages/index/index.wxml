@@ -37,14 +37,12 @@
       <block wx:for="{{REVERSE.reverseFun(healthyPullList2)}}">
         <block wx:for="{{item}}">
           <template is="healthyTemplate" data="{{...item}}" />
-          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
         </block>
       </block>
-
+      
       <block wx:for="{{healthyList2}}">
         <block wx:for="{{item}}">
           <template is="healthyTemplate" data="{{...item}}" />
-          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
         </block>
       </block>
       </scroll-view>
@@ -70,14 +68,12 @@
       <block wx:for="{{REVERSE.reverseFun(healthyPullList1)}}">
         <block wx:for="{{item}}">
           <template is="healthyTemplate" data="{{...item}}" />
-          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
         </block>
       </block>
 
       <block wx:for="{{healthyList1}}">
         <block wx:for="{{item}}">
           <template is="healthyTemplate" data="{{...item}}" />
-          <view class='line_view' wx:if="{{item.images[0].url}}"></view> 
         </block>
       </block>
     </scroll-view>
@@ -86,13 +82,29 @@
   </swiper>
   
   </view>
+
+  <!-- <button class='all_deal_button iconfont icon-fenxiang' direction="all" catchtap='__clickSetting' style='top:1000rpx;left:600rpx;' open-type='share'></button> -->
+
 </view>
 
 <template name="healthyTemplate">
-  <navigator class="healthy_container" url='#' bindtap='itemTap' data-text="{{content}}" data-title="{{title}}" wx:if="{{images[0].url}}">
-    <text class='title'>{{title}}</text>
+  <navigator class="healthy_container" url='#' bindtap='itemTap' data-text="{{content}}" data-title="{{title}}">
+    <text class='first_title'>{{title}}</text>
+    <!-- <text class='first_content'>{{content}}</text> -->
     <image class='image' src='{{images[0].url}}' wx:if="{{images[0].url}}"></image>
+    <view class='bottom_container'>
+      <view class='image_text_container' catchtap='__shoucangClick' data-newsId='{{newsId}}'>
+        <view class='iconfont icon-shoucang bottom_image' style="color:{{like ? '#d42371' : ''}}"></view>
+        <text class='bottom_title'>收藏</text>
+      </view>
+
+      <view class='image_text_container'>
+        <view class='iconfont icon-share bottom_image'></view>
+        <text class='bottom_title'>分享</text>
+      </view>
+    </view>
   </navigator>
+  <view class='line_view'></view>
 </template> 
 
 <wxs module="REVERSE">

@@ -1,16 +1,16 @@
 //index.js
 //获取应用实例
 
-const app = getApp()
+const app = getApp();
 var util = require('../../utils/util.js');
-
+var wxNotificationCenter = require("../../utils/3d/WxNotificationCenter.js");
 Page({
   data: {
     healthyList1:[],
     healthyPullList1:[],
     categoryName1:'',
-    helathyList2:[],
-    helathyPullList2: [],
+    healthyList2:[],
+    healthyPullList2: [],
     categoryName2:'',
     index:0,
     category1Index:1,
@@ -35,6 +35,89 @@ Page({
     }
   },
   
+  __changeItemStatus: function(newsId,status){
+    var _this = this;
+    let newId = newsId;
+
+    var likeList = wx.getStorageSync("globalData_like_list");
+    var item = null;
+    if (!likeList) {
+      likeList = [];
+    }
+
+    if (_this.data.index == 0) {
+      for (var i = 0; i < _this.data.healthyList2.length; ++i) {
+        var list = _this.data.healthyList2[i];
+        item = util.findItemFormListsWithId(list, newId, "newsId");
+        if (item && !item.like) {
+          item.like = status;
+          _this.setData({
+            [`healthyList2[${i}]`]: list
+          });
+
+        }
+      }
+
+      for (var i = 0; i < _this.data.healthyPullList2.length; ++i) {
+        var list = _this.data.healthyPullList2[i];
+        item = util.findItemFormListsWithId(list, newId, "newsId");
+        if (item && !item.like) {
+          item.like = status;
+          _this.setData({
+            [`healthyPullList2[${i}]`]: list
+          });
+        }
+      }
+    } else {
+
+      for (var i = 0; i < _this.data.healthyList1.length; ++i) {
+        var list = _this.data.healthyList1[i];
+        item = util.findItemFormListsWithId(list, newId, "newsId");
+        if (item && !item.like) {
+          item.like = status;
+          _this.setData({
+            [`healthyList1[${i}]`]: list
+          });
+        }
+      }
+
+      for (var i = 0; i < _this.data.healthyPullList1.length; ++i) {
+        var list = _this.data.healthyPullList1[i];
+        item = util.findItemFormListsWithId(list, newId, "newsId");
+        if (item && !item.like) {
+          item.like = status;
+          _this.setData({
+            [`healthyPullList1[${i}]`]: list
+          });
+        }
+      }
+    }
+
+    if (item) {
+      likeList.push(item);
+      wx.setStorageSync("globalData_like_list", likeList);
+      wxNotificationCenter.postNotificationName(wxNotificationCenter.constant.EVENT_SHOUCANG_THING);
+    }
+    
+  },
+
+  __shoucangClick: function(event){
+    var _this = this;
+    let newId = event.currentTarget.dataset.newsid;
+    _this.__changeItemStatus(newId,true);
+    console.warn(event);
+  },
+  
+  // onReachBottom: function(){
+  //   var _this = this;
+  //   _this.onReachSwiperBottom();
+  // },
+
+  // onPullDownRefresh: function(){
+  //   var _this = this;
+  //   _this.onReachSwiperTop();
+  // },
+
   onReachSwiperBottom: function () {
     var _this = this;
     if (_this.data.index == 0){
@@ -115,6 +198,14 @@ Page({
         showtype: 1
       });
     })
+
+    wxNotificationCenter.addNotification(wxNotificationCenter.constant.EVENT_SHOUCANG_DELETE_THING, (data) => {
+      if (data.newsId && data.status){
+        let newsId = data.newsId;
+        let status = data.status;
+        _this.__changeItemStatus(newsId, status);
+      }
+    }, this)
   },
 
   reloadLifetimesCategoryId_11: function () { 

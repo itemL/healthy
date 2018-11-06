@@ -1,12 +1,39 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/indexDetailPage/indexDetailPage"
+    "pages/indexDetailPage/indexDetailPage",
+    "pages/detailSettingPage/detailSettingPage",
+    "pages/likeListPage/likeListPage"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "健康养生文摘",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":true
+  },
+  "tabBar":{
+    "color":"#222222",
+    "selectedColor":"#d4237a",
+    "backgroundColor":"#fff",
+    "position":"bottom",
+    "list":[
+      {
+      "pagePath":"pages/index/index",
+      "text":"推荐",
+      "iconPath":"/images/tuijian.png",
+      "selectedIconPath":"/images/tuijianselected.png"
+      },
+      {
+        "pagePath": "pages/likeListPage/likeListPage",
+        "text": "收藏",
+        "iconPath": "/images/xihuan.png",
+        "selectedIconPath": "/images/xihuanselected.png"
+      }
+    ]
+  },
+  "networkTimeout":{
+    "request":10000,
+    "downloadFile":10000
   }
 }

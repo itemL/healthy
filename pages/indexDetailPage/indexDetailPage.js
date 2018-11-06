@@ -1,13 +1,19 @@
 // pages/indexDetailPage/indexDetailPage.js
 var wxParse = require('../wxParse/wxParse.js');
 const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title:''
+    title:'',
+    contextFont: app.globalData.contextFont,
+    red: app.globalData.red,
+    green: app.globalData.green,
+    blue: app.globalData.blue,
+    fontName: app.globalData.fontName
   },
 
   /**
@@ -15,20 +21,45 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    _this.options = options;
+    if(options.text && options.title){
+      app.globalData.text = options.text;
+      app.globalData.title = options.title;
+    }
+  },
+
+  __refreshTextFont:function(){
+    var _this = this;
+    _this.data.red = app.globalData.red;
+    _this.data.green = app.globalData.green;
+    _this.data.blue = app.globalData.blue;
+    _this.data.contextFont = app.globalData.contextFont;
 
     var needText = app.globalData.text.replace(/<p><img src="http/g, 'special seat by huiyanliu');
+    var hex = "#" + (((1 << 24)) + ((app.globalData.red << 16)) + ((app.globalData.green << 8)) + app.globalData.blue).toString(16).slice(1);
+    var repStr = "<p style=\"font-size:" + app.globalData.contextFont + "rpx;font-family:" + app.globalData.fontName + ";" + "color:" + hex + ";" + "text-indent:2em;\">";
 
-    needText = needText.replace(/<p>/g,'<p style="font-size:50rpx;font-family:Microsoft YaHei;text-indent:2em;">');
+    needText = needText.replace(/<p>/g, repStr);
 
     needText = needText.replace(/special seat by huiyanliu/g, '<p><img src="http');
 
     let needTitle = app.globalData.title ? app.globalData.title : "养生文摘";
     _this.setData({
-      title: needTitle
+      title: needTitle,
+      contextFont: app.globalData.contextFont
     });
-    wxParse.wxParse('article', 'html', needText ,_this,15);
+    wxParse.wxParse('article', 'html', needText, _this, 15);
+
   },
 
+  __clickSetting:function(res){
+    var _this = this;
+
+    wx.navigateTo({
+      url: '/pages/detailSettingPage/detailSettingPage',
+    })
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -40,7 +71,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this;
+    _this.__refreshTextFont();
   },
 
   /**
@@ -75,6 +107,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
+    var pathUrl = "/pages/indexDetailPage/indexDetailPage?text=" + app.globalData.text + "&title=" + app.globalData.title;
+    return {
+      title: app.globalData.title,
+      path: pathUrl,
+      success:(res) => {
+        console.warn(res);
+      },
+      fail:(res) => {
+        console.warn(res);
+      }
+    }
   }
 })

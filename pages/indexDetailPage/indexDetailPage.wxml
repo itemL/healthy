@@ -2,11 +2,15 @@
 <import src="../wxParse/wxParse.wxml"/>
 
 <view class='all_container'>
-  <text class='title'>{{title}}</text>
 
+  <text class='title'>{{title}}</text>
   <view class='container'>
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>
 </view>
+
+<view class='all_deal_button iconfont icon-shezhi' direction="all" catchtap='__clickSetting' style='top:1000rpx;left:600rpx;'></view>
+
+
 
 

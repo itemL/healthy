@@ -1,6 +1,10 @@
 /**index.wxss**/
 @import "../../common/base.wxss";
 
+button::after{
+  border: 0 none;
+}
+
 .container{
   height:1100rpx;
   left: 0rpx;
@@ -8,51 +12,6 @@
   position: relative;
   padding-left: 30rpx;
   padding-right: 30rpx;
-}
-
-
-.line_view{
-  height: 10rpx;
-  width: 100%;
-  background: #f3f6f8;
-}
-
-.healthy_container{
-  margin: 30rpx;
-  height: auto;
-  width: auto;
-  display: block;
-}
-
-.swiper_container{
-  width: 100%;
-  height:100%;
-}
-
-.healthy_container .title{
-  font-family: PingFangSc-Regular;
-  font-size: 40rpx;
-  color:#222222;
-  line-height: 50rpx;
-  text-align: left;
-  max-width: 100%;
-
-  display: -webkit-box;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.healthy_container .image{
-  background-image: linear-gradient(-180deg,rgba(0,0,0,0.26) 0%,rgba(0,0,0,0,26) 100%);
-  /* padding:30rpx; */
-
-  border-radius: 8rpx;
-  width: 100%;
-  height: 378rpx;
-  margin-top: 20rpx;
 }
 
 .navBar{
@@ -90,7 +49,8 @@
 }
 
 .scroll-view-swiper{
-  white-space: nowrap;
   overflow: hidden;
   display: block;
 }
+
+
