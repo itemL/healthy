@@ -1,8 +1,15 @@
 <view class='container'>  
   <view wx:if="{{likeList.length > 0}}">
-      <block wx:for="{{likeList}}">
-      <template is="healthyTemplate" data="{{...item}}" />
+      <block wx:for="{{likeList}}" wx:for-index="index">
+        <template is="healthyTemplate" data="{{...item}}" />
+        <view class='line_view' wx:if="{{index != likeList.length - 1}}"></view>
       </block>
+      <view class='nomore_container'>
+         <view class='image_title_container'>
+            <image class='image' src='/images/meiyougengduoliao.png'> </image>
+            <text class='title'>没有了,快去收藏吧</text>
+         </view>
+      </view>
   </view>
 
   <view wx:else class='none_container'>
@@ -31,5 +38,5 @@
       </view>
     </view>
   </navigator>
-  <view class='line_view'></view>
+  
 </template> 

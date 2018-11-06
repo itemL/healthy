@@ -179,3 +179,33 @@ page{
   text-align: center;
   padding-left: 8rpx;
 }
+
+/* 没有更多的模版 */
+.nomore_container{
+  height: 100rpx;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding-bottom: 50rpx;
+}
+
+.nomore_container .image_title_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_title_container .image{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.image_title_container .title{
+  font-size: 50rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
