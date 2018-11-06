@@ -167,7 +167,7 @@ page{
 }
 
 .image_text_container .bottom_image{
-  font-size: 40rpx;
+  font-size: 50rpx;
   color: black;
   line-height: 100%;
 }

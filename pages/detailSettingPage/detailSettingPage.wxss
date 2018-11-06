@@ -70,12 +70,12 @@
 }
 
 .container .image{
-  width: 58rpx;
-  height:58rpx;
+  width: 88rpx;
+  height:88rpx;
 
   color: #111111;
-  font-size: 40rpx;
-  line-height: 58rpx;
+  font-size: 68rpx;
+  line-height: 88rpx;
   text-align: center;
 }
 
