@@ -2,9 +2,9 @@
  
  <scroll-view class='sliderContainer_test_view' style="font-size:{{testSize}}rpx;color:rgba({{red}},{{green}},{{blue}},1);" scroll-y="true">可以在下面的选项里面设置自己喜欢的字体颜色，方便大家阅读与观看。</scroll-view>
 
-  <view style='padding-top:30rpx'>
+  <!-- <view style='padding-top:30rpx'>
   <picker range='{{fontType}}' value='1' range-key='name'><view>选择字体库:{{fontName}}</view></picker>
-  </view>
+  </view> -->
 
   <view>
 
