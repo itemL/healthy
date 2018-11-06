@@ -49,7 +49,7 @@ Page({
       for (var i = 0; i < _this.data.healthyList2.length; ++i) {
         var list = _this.data.healthyList2[i];
         item = util.findItemFormListsWithId(list, newId, "newsId");
-        if (item && !item.like) {
+        if (item) {
           item.like = status;
           _this.setData({
             [`healthyList2[${i}]`]: list
@@ -61,7 +61,7 @@ Page({
       for (var i = 0; i < _this.data.healthyPullList2.length; ++i) {
         var list = _this.data.healthyPullList2[i];
         item = util.findItemFormListsWithId(list, newId, "newsId");
-        if (item && !item.like) {
+        if (item) {
           item.like = status;
           _this.setData({
             [`healthyPullList2[${i}]`]: list
@@ -73,7 +73,7 @@ Page({
       for (var i = 0; i < _this.data.healthyList1.length; ++i) {
         var list = _this.data.healthyList1[i];
         item = util.findItemFormListsWithId(list, newId, "newsId");
-        if (item && !item.like) {
+        if (item) {
           item.like = status;
           _this.setData({
             [`healthyList1[${i}]`]: list
@@ -84,7 +84,7 @@ Page({
       for (var i = 0; i < _this.data.healthyPullList1.length; ++i) {
         var list = _this.data.healthyPullList1[i];
         item = util.findItemFormListsWithId(list, newId, "newsId");
-        if (item && !item.like) {
+        if (item) {
           item.like = status;
           _this.setData({
             [`healthyPullList1[${i}]`]: list
@@ -93,7 +93,7 @@ Page({
       }
     }
 
-    if (item) {
+    if (item && status) {
       likeList.push(item);
       wx.setStorageSync("globalData_like_list", likeList);
       wxNotificationCenter.postNotificationName(wxNotificationCenter.constant.EVENT_SHOUCANG_THING);
@@ -107,16 +107,6 @@ Page({
     _this.__changeItemStatus(newId,true);
     console.warn(event);
   },
-  
-  // onReachBottom: function(){
-  //   var _this = this;
-  //   _this.onReachSwiperBottom();
-  // },
-
-  // onPullDownRefresh: function(){
-  //   var _this = this;
-  //   _this.onReachSwiperTop();
-  // },
 
   onReachSwiperBottom: function () {
     var _this = this;
@@ -200,7 +190,7 @@ Page({
     })
 
     wxNotificationCenter.addNotification(wxNotificationCenter.constant.EVENT_SHOUCANG_DELETE_THING, (data) => {
-      if (data.newsId && data.status){
+      if (data && data.newsId){
         let newsId = data.newsId;
         let status = data.status;
         _this.__changeItemStatus(newsId, status);
@@ -214,6 +204,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles){
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         _this.setData({
           healthyList1: [items],
           categoryName1: res.data.categoryName,
@@ -232,6 +223,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         let length = _this.data.healthyList1.length;
         _this.setData({
           [`healthyList1[${length}]`]: items,
@@ -251,6 +243,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         let length = _this.data.healthyPullList1 ? _this.data.healthyPullList1.length : 0;
         _this.setData({
           [`healthyPullList1[${length}]`]: items,
@@ -269,6 +262,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         _this.setData({
           healthyList2: [items],
           categoryName2: res.data.categoryName,
@@ -287,6 +281,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         let length = _this.data.healthyList2.length;
         _this.setData({
           [`healthyList2[${length}]`]: items,
@@ -306,6 +301,7 @@ Page({
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
         var items = res.data.articles;
+        _this.refreshModeListsStatus(items);
         let length = _this.data.healthyPullList2 ? _this.data.healthyPullList2.length : 0;
         _this.setData({
           [`healthyPullList2[${length}]`]: items,
@@ -316,5 +312,18 @@ Page({
     }, function (res) {
       console.warn("res = ", res);
     });
+  },
+
+  refreshModeListsStatus: function (shouldDealItemLists) {
+    var _this = this;
+    if (shouldDealItemLists && shouldDealItemLists.length > 0){
+      var likeList = wx.getStorageSync("globalData_like_list");
+      for (var i = 0; i < likeList.length; ++i) {
+        var item = likeList[i];
+        item = util.findItemFormListsWithId(shouldDealItemLists, item.newsId, "newsId");
+        item.like = true;
+      }
+    }
   }
+
 })

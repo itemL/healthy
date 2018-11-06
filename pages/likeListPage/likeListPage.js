@@ -37,8 +37,8 @@ Page({
     for (var i = 0; i < likeList.length; ++i){
       var item = likeList[i];
       if (item.newsId == newId){
-        likeList = likeList.splice(i,1);
-        wxNotificationCenter.postNotificationName(wxNotificationCenter.constant.EVENT_DELETE_SHOUCANG_THING, { newsId: newId,status:false});
+        likeList.splice(i,1);
+        wxNotificationCenter.postNotificationName(wxNotificationCenter.constant.EVENT_SHOUCANG_DELETE_THING, { newsId: newId,status:false});
         break;
       }
     }
