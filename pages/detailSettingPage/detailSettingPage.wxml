@@ -5,7 +5,7 @@
   <view>
 
         <view class='sliderContainer' style='padding-top:30rpx;'>
-        <text class='text'>字体大小              </text>
+        <text class='text'>字体大小(Fo)</text>
         <slider class='slider' bindchange='__bindchangeFont' value='{{testSize}}'></slider>
         <text class='text' wx:if="{{testSize > 0}}">{{testSize}}</text>
       </view>
