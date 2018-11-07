@@ -16,7 +16,10 @@ Page({
     green: app.globalData.green,
     blue: app.globalData.blue,
     fontName: app.globalData.fontName,
-    playing:false
+    playing:false,
+    readList:[],
+    readIndex:0,
+    isPause:false
   },
   innerAudioContext : wx.createInnerAudioContext(),
   /**
@@ -32,31 +35,56 @@ Page({
     this.innerAudioContext.onError((res) => {
       console.warn("语音播放失败 : ",res);
     })
+
+    this.innerAudioContext.onEnded((res) => {
+      console.warn("语音播放结束 : ", res);
+      if (_this.data.readIndex < _this.data.readList.length){
+        ++_this.data.readIndex;
+        _this.__startPlayText();
+      }
+    })
+
+    this.innerAudioContext.onPause((res) => {
+      console.warn("语音播放暂停 : ", res);
+      _this.data.isPause = true;
+    })
   },
   
   __clickPlaying: function(){
     var _this = this;
     if (_this.data.playing){
-      _this.innerAudioContext.stop();
+      _this.innerAudioContext.pause();
       _this.setData({ playing: false });
     }else{
-      var readText = util.removeHTMLTag(app.globalData.text);
-      readText = readText.substring(0, 200);
-      plugin.textToSpeech({
-        lang: "zh_CN",
-        tts: true,
-        content: readText,
-        success: function (res) {
-          console.warn(res);
-          _this.innerAudioContext.src = res.filename;
-          _this.innerAudioContext.play();
-          _this.setData({ playing: true });
-        },
-        fail: function (res) {
-          console.warn(res);
-        }
-      })
+      if (_this.data.isPause){
+        _this.data.isPause = false;
+        _this.innerAudioContext.play();
+        _this.setData({ playing: true });
+      }else{
+        var readText = util.removeHTMLTag(app.globalData.text);
+        _this.data.readList = util.strChangeToListWith100length(readText);
+        _this.__startPlayText();
+      }
     }
+  },
+
+  __startPlayText: function(){
+    var _this = this;
+    
+    plugin.textToSpeech({
+      lang: "zh_CN",
+      tts: true,
+      content: _this.data.readList[_this.data.readIndex],
+      success: function (res) {
+        console.warn(res);
+        _this.innerAudioContext.src = res.filename;
+        _this.innerAudioContext.play();
+        _this.setData({ playing: true });
+      },
+      fail: function (res) {
+        console.warn(res);
+      }
+    })
   },
 
   __refreshTextFont:function(){
@@ -66,13 +94,13 @@ Page({
     _this.data.blue = app.globalData.blue;
     _this.data.contextFont = app.globalData.contextFont;
 
-    var needText = app.globalData.text.replace(/<p><img src="http/g, 'special seat by huiyanliu');
+    var needText = app.globalData.text.replace(/<p><img/g, 'special seat by huiyanliu');
     var hex = "#" + (((1 << 24)) + ((app.globalData.red << 16)) + ((app.globalData.green << 8)) + app.globalData.blue).toString(16).slice(1);
     var repStr = "<p style=\"font-size:" + app.globalData.contextFont + "rpx;font-family:" + app.globalData.fontName + ";" + "color:" + hex + ";" + "text-indent:2em;\">";
 
     needText = needText.replace(/<p>/g, repStr);
 
-    needText = needText.replace(/special seat by huiyanliu/g, '<p><img src="http');
+    needText = needText.replace(/special seat by huiyanliu/g, '<p><img');
 
     let needTitle = app.globalData.title ? app.globalData.title : "养生文摘";
     _this.setData({

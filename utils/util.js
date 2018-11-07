@@ -59,13 +59,29 @@ function removeHTMLTag(str) {
 };
 
 function strChangeToListWith100length(str){
-    let length = 100;
+  let length = 100;
+  var start = 0;
+  var list = [];
+  do{
+    if (start + length <= str.length){
+      var text = [...str].splice(start, length).join('');
+      start = start + length;
+      list.push(text);
+    }else{
+      var text = [...str].splice(start, str.length - start).join('');
+      list.push(text);
+      break;
+    }
+  } while (start <= str.length)
+
+  return list;
 }
 
 module.exports = {
   formatTime: formatTime,
   fetch: fetch,
   findItemFormListsWithId: findItemFormListsWithId,
-  removeHTMLTag: removeHTMLTag
+  removeHTMLTag: removeHTMLTag,
+  strChangeToListWith100length: strChangeToListWith100length
 }
 
