@@ -48,9 +48,24 @@ function fetch(url) {
   });
 };
 
+function removeHTMLTag(str) {
+  str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+  str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+  str = str.replace(/\n[\s| | ]*\r/g, '\n'); //去除多余空行
+  str = str.replace(/ /ig, '');//去掉 
+  str = str.replace(/\r\n/g, '');//去掉\n 
+  str = str.replace(/\n/g, '');//去掉\n
+  return str;
+};
+
+function strChangeToListWith100length(str){
+    let length = 100;
+}
+
 module.exports = {
   formatTime: formatTime,
   fetch: fetch,
-  findItemFormListsWithId: findItemFormListsWithId
+  findItemFormListsWithId: findItemFormListsWithId,
+  removeHTMLTag: removeHTMLTag
 }
 

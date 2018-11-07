@@ -1,5 +1,7 @@
 // pages/indexDetailPage/indexDetailPage.js
 var wxParse = require('../wxParse/wxParse.js');
+var util = require('../../utils/util.js');
+const plugin = requirePlugin("WechatSI");
 const app = getApp();
 
 Page({
@@ -13,9 +15,10 @@ Page({
     red: app.globalData.red,
     green: app.globalData.green,
     blue: app.globalData.blue,
-    fontName: app.globalData.fontName
+    fontName: app.globalData.fontName,
+    playing:false
   },
-
+  innerAudioContext : wx.createInnerAudioContext(),
   /**
    * 生命周期函数--监听页面加载
    */
@@ -25,6 +28,34 @@ Page({
     if(options.text && options.title){
       app.globalData.text = options.text;
       app.globalData.title = options.title;
+    }
+    this.innerAudioContext.onError((res) => {
+      console.warn("语音播放失败 : ",res);
+    })
+  },
+  
+  __clickPlaying: function(){
+    var _this = this;
+    if (_this.data.playing){
+      _this.innerAudioContext.stop();
+      _this.setData({ playing: false });
+    }else{
+      var readText = util.removeHTMLTag(app.globalData.text);
+      readText = readText.substring(0, 200);
+      plugin.textToSpeech({
+        lang: "zh_CN",
+        tts: true,
+        content: readText,
+        success: function (res) {
+          console.warn(res);
+          _this.innerAudioContext.src = res.filename;
+          _this.innerAudioContext.play();
+          _this.setData({ playing: true });
+        },
+        fail: function (res) {
+          console.warn(res);
+        }
+      })
     }
   },
 

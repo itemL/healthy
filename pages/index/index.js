@@ -321,7 +321,9 @@ Page({
       for (var i = 0; i < likeList.length; ++i) {
         var item = likeList[i];
         item = util.findItemFormListsWithId(shouldDealItemLists, item.newsId, "newsId");
-        item.like = true;
+        if(item){
+          item.like = true;
+        }
       }
     }
   }
