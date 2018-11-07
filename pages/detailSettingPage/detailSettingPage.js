@@ -2,6 +2,7 @@
 const app = getApp();
 
 var fontType = [{name:"444"},{name:"2222"}];
+var wxNotificationCenter = require("../../utils/3d/WxNotificationCenter.js");
 
 Page({
 
@@ -77,6 +78,9 @@ Page({
     app.globalData.blue = _this.data.blue;
     app.globalData.contextFont = _this.data.testSize;
     wx.setStorageSync("globalData_text_font_type", { red: _this.data.red, green: this.data.green, blue: _this.data.blue, contextFont: _this.data.testSize});
+
+    wxNotificationCenter.postNotificationName(wxNotificationCenter.constant.EVENT_FONT_CHANGE);
+
     wx.navigateBack();
   },
   /**

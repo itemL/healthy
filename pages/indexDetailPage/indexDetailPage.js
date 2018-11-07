@@ -2,6 +2,7 @@
 var wxParse = require('../wxParse/wxParse.js');
 var util = require('../../utils/util.js');
 const plugin = requirePlugin("WechatSI");
+var wxNotificationCenter = require("../../utils/3d/WxNotificationCenter.js");
 const app = getApp();
 
 Page({
@@ -49,6 +50,10 @@ Page({
       console.warn("语音播放暂停 : ", res);
       _this.data.isPause = true;
     })
+
+    wxNotificationCenter.addNotification(wxNotificationCenter.constant.EVENT_FONT_CHANGE, (data) => {
+      _this.__refreshTextFont();
+    }, this)
   },
   
   __clickPlaying: function(){
@@ -150,6 +155,7 @@ Page({
     var _this = this;
     _this.innerAudioContext.pause();
     _this.setData({ playing: false });
+    wxNotificationCenter.removeNotification(wxNotificationCenter.constant.EVENT_FONT_CHANGE, this);
   },
 
   /**

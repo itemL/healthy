@@ -192,5 +192,6 @@ module.exports = {
     constant:{
       EVENT_SHOUCANG_THING:'event_shoucang',
       EVENT_SHOUCANG_DELETE_THING: 'event_delete_shoucang',
+      EVENT_FONT_CHANGE:'event_font_change'
     }
 }
