@@ -17,6 +17,9 @@ App({
       _this.globalData.contextFont = 50;
       _this.globalData.fontName = "Microsoft YaHei";
     }
+    wx.setInnerAudioOption({
+      "obeyMuteSwitch":false
+    });
   },
   globalData: {
     userInfo: null,

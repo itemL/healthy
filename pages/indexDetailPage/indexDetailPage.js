@@ -32,6 +32,7 @@ Page({
       app.globalData.text = options.text;
       app.globalData.title = options.title;
     }
+    
     this.innerAudioContext.onError((res) => {
       console.warn("语音播放失败 : ",res);
     })
