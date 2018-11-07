@@ -101,9 +101,9 @@ page{
   text-overflow: ellipsis;
 
   font-family: PingFangSc-Regular;
-  font-size: 58rpx;
+  font-size: 40rpx;
   color:#222222;
-  line-height: 80rpx;
+  line-height: 50rpx;
   max-width: 100%;
   white-space: 8rpx;
   text-align: left;
@@ -167,7 +167,7 @@ page{
 }
 
 .image_text_container .bottom_image{
-  font-size: 50rpx;
+  font-size: 48rpx;
   color: black;
   line-height: 100%;
 }
@@ -175,6 +175,7 @@ page{
 .image_text_container .bottom_title{
   color: black;
   line-height: 100rpx;
+  font-size: 40rpx;
   height: 100%;
   text-align: center;
   padding-left: 8rpx;

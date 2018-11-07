@@ -10,9 +10,9 @@
 
 .all_container .title{
   font-family: PingFangSc-Regular;
-  font-size: 58rpx;
+  font-size: 50rpx;
   color:#222222;
-  line-height: 80rpx;
+  line-height: 60rpx;
   max-width: 100%;
   margin-bottom: 50rpx;
   white-space: 8rpx;

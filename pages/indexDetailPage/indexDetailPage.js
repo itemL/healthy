@@ -96,6 +96,7 @@ Page({
     _this.data.contextFont = app.globalData.contextFont;
 
     var needText = app.globalData.text.replace(/<p><img/g, 'special seat by huiyanliu');
+    needText = needText.replace(/<p><strong><img/g, 'special seat by huiyanliu');
     var hex = "#" + (((1 << 24)) + ((app.globalData.red << 16)) + ((app.globalData.green << 8)) + app.globalData.blue).toString(16).slice(1);
     var repStr = "<p style=\"font-size:" + app.globalData.contextFont + "rpx;font-family:" + app.globalData.fontName + ";" + "color:" + hex + ";" + "text-indent:2em;\">";
 
@@ -146,7 +147,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    var _this = this;
+    _this.innerAudioContext.pause();
+    _this.setData({ playing: false });
   },
 
   /**

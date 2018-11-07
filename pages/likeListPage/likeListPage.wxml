@@ -1,6 +1,6 @@
 <view class='container'>  
   <view wx:if="{{likeList.length > 0}}">
-      <block wx:for="{{likeList}}" wx:for-index="index">
+      <block wx:for="{{REVERSE.reverseFun(likeList)}}" wx:for-index="index">
         <template is="healthyTemplate" data="{{...item}}" />
         <view class='line_view' wx:if="{{index != likeList.length - 1}}"></view>
       </block>
@@ -40,3 +40,17 @@
   </navigator>
   
 </template> 
+
+<wxs module="REVERSE">
+    var reverseFun = function(array){
+    if(array){
+     var reverseList = [];
+      for(var i = array.length - 1; i >= 0; --i){
+        reverseList[array.length - i - 1] = array[i];
+      }
+      return reverseList;
+    }  
+  }
+
+module.exports.reverseFun = reverseFun;
+</wxs>
