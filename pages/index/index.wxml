@@ -83,14 +83,11 @@
   
   </view>
 
-  <!-- <button class='all_deal_button iconfont icon-fenxiang' direction="all" catchtap='__clickSetting' style='top:1000rpx;left:600rpx;' open-type='share'></button> -->
-
 </view>
 
 <template name="healthyTemplate">
   <navigator class="healthy_container" url='#' bindtap='itemTap' data-text="{{content}}" data-title="{{title}}">
     <text class='first_title'>{{title}}</text>
-    <!-- <text class='first_content'>{{content}}</text> -->
     <image class='image' src='{{images[0].url}}' wx:if="{{images[0].url}}"></image>
     <view class='bottom_container'>
       <view class='image_text_container' catchtap='__shoucangClick' data-newsId='{{newsId}}'>

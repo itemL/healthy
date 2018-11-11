@@ -198,12 +198,27 @@ Page({
     }, this)
   },
 
+  __formatFakeItems:function(list){
+    var _this = this;
+    if(list && list.length > 0){
+      for (var i = 0; i < list.length; ++i) {
+        var item = list[i];
+        if (!item.images || item.images.length <= 0){
+          let index = parseInt(Math.random() * 5) + 1;
+          let imagePath = "/images/yangsheng" + index + ".jpg";
+          item.images = [{url:imagePath}];
+        }
+      }
+    }
+    return list;
+  },
+
   reloadLifetimesCategoryId_11: function () { 
     var _this = this;
     return util.fetch("https://m.lifetimes.cn/api/baidu/inter/list.do?categoryId=11&page=1&size=20").then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles){
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         _this.setData({
           healthyList1: [items],
@@ -222,7 +237,7 @@ Page({
     return util.fetch(moreLifetimesUrl).then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         let length = _this.data.healthyList1.length;
         _this.setData({
@@ -242,7 +257,7 @@ Page({
     return util.fetch(moreLifetimesUrl).then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         let length = _this.data.healthyPullList1 ? _this.data.healthyPullList1.length : 0;
         _this.setData({
@@ -261,7 +276,7 @@ Page({
     return util.fetch("https://m.lifetimes.cn/api/baidu/inter/list.do?categoryId=12&page=1&size=20").then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         _this.setData({
           healthyList2: [items],
@@ -280,7 +295,7 @@ Page({
     return util.fetch(moreLifetimesUrl).then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         let length = _this.data.healthyList2.length;
         _this.setData({
@@ -300,7 +315,7 @@ Page({
     return util.fetch(moreLifetimesUrl).then(function (res) {
       console.warn("res = ", res);
       if (res.data && res.data.articles) {
-        var items = res.data.articles;
+        var items = _this.__formatFakeItems(res.data.articles);
         _this.refreshModeListsStatus(items);
         let length = _this.data.healthyPullList2 ? _this.data.healthyPullList2.length : 0;
         _this.setData({
