@@ -204,13 +204,35 @@ Page({
       for (var i = 0; i < list.length; ++i) {
         var item = list[i];
         if (!item.images || item.images.length <= 0){
-          let index = parseInt(Math.random() * 5) + 1;
+          let index = parseInt(Math.random() * 10) + 1;
           let imagePath = "/images/yangsheng" + index + ".jpg";
           item.images = [{url:imagePath}];
         }
       }
     }
     return list;
+  },
+
+  /**
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function (res) {
+
+    var _this = this;
+    let title = res.target ? res.target.dataset.title : '';
+    let text = res.target ? res.target.dataset.text : '';
+    var pathUrl = res.target ? ("/pages/indexDetailPage/indexDetailPage?text=" + text + "&title=" + title) : '/pages/index/index';
+    return {
+      title: "你的好友正在阅读",
+      path: pathUrl,
+      success: (res) => {
+        console.warn(res);
+      },
+      fail: (res) => {
+        console.warn(res);
+      }
+    }
+
   },
 
   reloadLifetimesCategoryId_11: function () { 
