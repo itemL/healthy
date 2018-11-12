@@ -3,6 +3,7 @@ var wxParse = require('../wxParse/wxParse.js');
 var util = require('../../utils/util.js');
 const plugin = requirePlugin("WechatSI");
 var wxNotificationCenter = require("../../utils/3d/WxNotificationCenter.js");
+var ImagesFlyAniView = require("../../pages/popImageAnimation/imagesFlyAniView.js");
 const app = getApp();
 
 Page({
@@ -54,6 +55,22 @@ Page({
     wxNotificationCenter.addNotification(wxNotificationCenter.constant.EVENT_FONT_CHANGE, (data) => {
       _this.__refreshTextFont();
     }, this)
+
+
+    _this.imagesFlyAniView = new ImagesFlyAniView(_this);
+
+    var imageList = [];
+    imageList.push("/images/shezhi.png");
+    imageList.push((this.data.playing ? "/images/bofang-zanting.png" :"/images/bofang-playing.png"));
+    
+    _this.imagesFlyAniView.load("/images/gongjuxiang.png", imageList, { width: 40, height: 40 }, 30, 0.3, 2, function (index) {
+      console.warn(index);
+      if(index == 1){
+        _this.__clickPlaying();
+      }else if(index == 0){
+        _this.__clickSetting();
+      }
+    });
   },
   
   __clickPlaying: function(){

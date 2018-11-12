@@ -64,18 +64,9 @@ page{
 }
 
 .all_deal_button{
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 100%;
-  background-color:rgb(210, 222, 228);
-
-  font-size: 60rpx;
-  line-height: 100rpx;
-  text-align: center;
-
   position: fixed;
-  top: 0rpx;
-  left: 0rpx;
+  top:900rpx;
+  left:600rpx;
 
   padding: 0;
 }

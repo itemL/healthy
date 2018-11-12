@@ -1,5 +1,6 @@
 <!--pages/indexDetailPage/indexDetailPage.wxml-->
 <import src="../wxParse/wxParse.wxml"/>
+<import src="../../pages/popImageAnimation/imagesFlyAniView.wxml" />
 
 <view class='all_container'>
 
@@ -9,10 +10,11 @@
   </view>
 </view>
 
+<view class='all_deal_button'>
+  <template is="fly_images" data="{{ imageList , imageSize,startImageUrl,animationStatus}}" /> 
+</view>
 
-<view class='all_deal_button iconfont icon-shezhi' direction="all" catchtap='__clickSetting' style='top:1000rpx;left:600rpx;'></view>
 
-<view class="all_deal_button iconfont {{playing ? 'icon-zanting' : 'icon-bofang'}}" direction="all" catchtap='__clickPlaying' style='top:800rpx;left:600rpx;'></view>
 
 
 

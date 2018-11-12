@@ -1,0 +1,25 @@
+
+
+.fly_container{
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.fly_container .round{
+    border-radius: 100%;
+    position: absolute;  
+    top:0rpx;
+    left:0rpx;
+
+    line-height: 100rpx;
+}
+
+.fly_container .image_container{
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}
