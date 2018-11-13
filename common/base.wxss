@@ -75,6 +75,9 @@ page{
   height: auto;
   width: auto;
   display: block;
+
+  margin-bottom: 30rpx;
+  background-color: #f2f2f2;
 }
 
 .swiper_container{
@@ -99,7 +102,8 @@ page{
   white-space: 8rpx;
   text-align: left;
 
-  margin-top: 18rpx;
+  padding-top: 20rpx;
+  padding-left: 8rpx;
 }
 
 .healthy_container .first_content{

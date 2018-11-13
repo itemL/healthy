@@ -95,7 +95,7 @@
         <text class='bottom_title'>收藏</text>
       </view>
       <view>
-        <button class='image_text_container' data-text="{{content}}" data-title='{{title}}' style='padding:0rpx;background:#fff' open-type='share' catchtap='clickShare'>
+        <button class='image_text_container' data-text="{{content}}" data-title='{{title}}' style='padding:0rpx;background:#f2f2f2' open-type='share' catchtap='clickShare'>
         <view class='iconfont icon-share bottom_image'></view>
         <text class='bottom_title'>分享</text>
         </button>
@@ -103,7 +103,6 @@
       
     </view>
   </navigator>
-  <view class='line_view'></view>
 </template> 
 
 <wxs module="REVERSE">
