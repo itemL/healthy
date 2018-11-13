@@ -75,9 +75,8 @@ page{
   height: auto;
   width: auto;
   display: block;
-
+  background-color:#ffffff;
   margin-bottom: 30rpx;
-  background-color: #f2f2f2;
 }
 
 .swiper_container{
@@ -86,7 +85,6 @@ page{
 }
 
 .healthy_container .first_title{
-
   display: -webkit-box;
   word-break: break-all;
   -webkit-box-orient: vertical;

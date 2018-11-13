@@ -7,7 +7,7 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#f2f2f2",
     "navigationBarTitleText": "健康养生文摘",
     "navigationBarTextStyle":"black",
     "enablePullDownRefresh":true
@@ -15,7 +15,7 @@
   "tabBar":{
     "color":"#222222",
     "selectedColor":"#d4237a",
-    "backgroundColor":"#fff",
+    "backgroundColor":"#f2f2f2",
     "position":"bottom",
     "list":[
       {

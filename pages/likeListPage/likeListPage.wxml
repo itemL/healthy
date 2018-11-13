@@ -2,7 +2,6 @@
   <view wx:if="{{likeList.length > 0}}">
       <block wx:for="{{REVERSE.reverseFun(likeList)}}" wx:for-index="index">
         <template is="healthyTemplate" data="{{...item}}" />
-        <view class='line_view' wx:if="{{index != likeList.length - 1}}"></view>
       </block>
       <view class='nomore_container'>
          <view class='image_title_container'>
